@@ -1,0 +1,6 @@
+# binari e reti dei motori: restano fuori dal repo (vedi engines/REPORT.md)
+*.exe
+*.nnue
+*.nn
+*.bin
+__pycache__/

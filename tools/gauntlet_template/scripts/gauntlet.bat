@@ -9,7 +9,11 @@ rem   roundrobin= tutti contro tutti (190 accoppiamenti, 7600 partite!)
 set HASH=2048
 set THREADS=4
 set TC=1690+19
-set CONCURRENCY=5
+rem corsie indipendenti per nodo x partite in parallelo dentro una corsia:
+rem LANES x CONCURRENCY x THREADS = core fisici del nodo (5 x 1 x 4 = 20).
+rem Piu' corsie = nessun tempo morto a fine match (ogni corsia ha il suo fastchess).
+set LANES=5
+set CONCURRENCY=1
 set PASSES=2
 set ROUNDS_PER_PASS=5
 set LOG_LEVEL=info

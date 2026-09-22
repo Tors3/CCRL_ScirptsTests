@@ -8,7 +8,7 @@ Copia nel repo (default C:\Users\Francesco\Documents\GitHub\CCRL_Scirpts):
   engines\REPORT.md                -> engines\REPORT.md
   engines\<motore>\uci_options.txt -> engines\uci_options\<motore>.txt
   tools\gauntlet_template\scripts\ -> tools\gauntlet_template\scripts\
-  new_gauntlet.py, sync_repo.py    -> tools\
+  new_gauntlet.py, sync_repo.py, tools\*.py -> tools\
   gauntlets\<nome>\scripts,config  -> tournaments\<nome>\scripts,config
   gauntlets\<nome>\results         -> results\gauntlets\<nome>\
   gauntlets\<nome>\pgn\node*.pgn   -> results\gauntlets\<nome>\pgn\   (--no-pgn per saltarli)
@@ -127,6 +127,7 @@ def main():
               os.path.join(REPO, "tools", "gauntlet_template"), dry)
     for f in ("new_gauntlet.py", "sync_repo.py"):
         copy(os.path.join(CCRL_ROOT, f), os.path.join(REPO, "tools", f), dry)
+    copy_glob(os.path.join(CCRL_ROOT, "tools", "*.py"), os.path.join(REPO, "tools"), dry)
 
     gauntlets = sorted(d for d in glob.glob(os.path.join(CCRL_ROOT, "gauntlets", "*"))
                        if os.path.isdir(d) and not os.path.basename(d).startswith("_"))

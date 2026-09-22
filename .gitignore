@@ -4,3 +4,8 @@
 *.nn
 *.bin
 __pycache__/
+
+# tablebase e PGN grezzi
+*.rtbw
+*.rtbz
+pgn/

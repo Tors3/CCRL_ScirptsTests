@@ -402,10 +402,26 @@ def system_checks():
         try:
             out = subprocess.run(["powercfg", "/getactivescheme"],
                                  capture_output=True, text=True).stdout.lower()
-            if not any(g in out for g in ("8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c",
-                                          "e9a42b02-d5df-448d-aa00-03f14749eb61")):
-                warn.append("power plan is not 'High performance' "
-                            "(powercfg /setactive SCHEME_MIN)")
+            known = any(g in out for g in ("8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c",
+                                           "e9a42b02-d5df-448d-aa00-03f14749eb61"))
+            # A custom or OEM plan (a duplicate of High performance, any language)
+            # has its own GUID, so check what actually matters instead: the
+            # minimum processor state on AC. 100% means the CPU never downclocks.
+            if not known:
+                q = subprocess.run(["powercfg", "/query", "SCHEME_CURRENT",
+                                    "SUB_PROCESSOR", "PROCTHROTTLEMIN"],
+                                   capture_output=True, text=True).stdout
+                ac = re.findall(r":\s*0x([0-9a-fA-F]+)", q)
+                # the last two values are the current AC and DC indices
+                min_state = int(ac[-2], 16) if len(ac) >= 2 else None
+                if min_state is None:
+                    warn.append("could not read the power plan: make sure the "
+                                "minimum processor state is 100% "
+                                "(powercfg /setactive SCHEME_MIN)")
+                elif min_state < 100:
+                    warn.append(f"minimum processor state is {min_state}% on AC: "
+                                f"the CPU can downclock during the benchmark "
+                                f"(powercfg /setactive SCHEME_MIN)")
         except Exception:
             pass
     return warn

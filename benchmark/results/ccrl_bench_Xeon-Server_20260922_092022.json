@@ -1,0 +1,44 @@
+{
+  "host": "Xeon-Server",
+  "os": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel(R) Xeon(R) Gold 6138 CPU @ 2.00GHz",
+  "engine": "Stockfish 10",
+  "build": "x64",
+  "sf": "C:\\Users\\Francesco\\Desktop\\CCRL\\stockfish-10-win\\Windows\\stockfish_10_x32.exe",
+  "pin": "win",
+  "args": {
+    "sf": null,
+    "build": "x64",
+    "levels": "76",
+    "runs": 10,
+    "warmup": 1,
+    "hash": 16,
+    "depth": 13,
+    "ref_ms": 2054,
+    "no_pin": false,
+    "out": null
+  },
+  "signature": [
+    3939338
+  ],
+  "results": [
+    {
+      "instances": 76,
+      "sockets": "0+1",
+      "ht_siblings": 36,
+      "nps_mean": 600048,
+      "nps_median": 592649,
+      "nps_min_instance": 488831,
+      "nps_max_instance": 757494,
+      "stdev_pct": 7.41,
+      "total_nps": 45603660,
+      "seconds": 97.1,
+      "bench_time_ms": 6565,
+      "factor": 3.1962,
+      "tc_40/15": "40/48  (47:57)",
+      "tc_40/2": "40/6:24",
+      "tc_15m+10s": "47:57 + 32.0s",
+      "tc_2m+1s": "384s + 3.20s"
+    }
+  ]
+}

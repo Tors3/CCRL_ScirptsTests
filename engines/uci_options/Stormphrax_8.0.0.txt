@@ -1,0 +1,19 @@
+id name Stormphrax 8.0.0
+option name Hash type spin default 64 min 1 max 67108864
+option name ClearHash type button
+option name Threads type spin default 1 min 1 max 2048
+option name MultiPV type spin default 1 min 1 max 256
+option name Contempt type spin default 0 min -1000 max 1000
+option name UCI_Chess960 type check default false
+option name UCI_ShowWDL type check default true
+option name EvalSharpness type spin default 115 min 100 max 120
+option name ShowCurrMove type check default false
+option name MoveOverhead type spin default 10 min 0 max 50000
+option name SoftNodes type check default false
+option name SoftNodeHardLimitMultiplier type spin default 1678 min 1 max 5000
+option name EnableWeirdTCs type check default false
+option name Minimal type check default false
+option name SyzygyPath type string default <empty>
+option name SyzygyProbeDepth type spin default 1 min 1 max 248
+option name SyzygyProbeLimit type spin default 7 min 0 max 7
+option name SyzygyProbeRootOnly type check default false

@@ -1,0 +1,14 @@
+id name Caissa 2.0 AVX2
+option name Hash type spin default 64 min 1 max 1048576
+option name MultiPV type spin default 1 min 1 max 280
+option name MoveOverhead type spin default 10 min 0 max 10000
+option name Threads type spin default 1 min 1 max 1024
+option name Ponder type check default false
+option name EvalFile type string default <empty>
+option name EvalRandomization type spin default 0 min 0 max 100
+option name SyzygyPath type string default <empty>
+option name SyzygyProbeLimit type spin default 6 min 4 max 7
+option name UCI_Chess960 type check default false
+option name UCI_ShowWDL type check default false
+option name UseSAN type check default false
+option name ColorConsoleOutput type check default false

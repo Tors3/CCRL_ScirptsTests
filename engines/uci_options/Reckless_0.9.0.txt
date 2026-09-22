@@ -1,0 +1,9 @@
+id name Reckless 0.9.0
+option name Hash type spin default 16 min 1 max 262144
+option name Threads type spin default 1 min 1 max 512
+option name MoveOverhead type spin default 100 min 0 max 2000
+option name Minimal type check default false
+option name Clear Hash type button
+option name UCI_Chess960 type check default false
+option name MultiPV type spin default 1 min 1 max 256
+option name SyzygyPath type string default

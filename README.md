@@ -7,12 +7,30 @@ Script e risultati per i test in stile CCRL 40/15 (host: 2x Xeon Gold 6138, 2 no
 benchmark/
   ccrl_bench.py                        calibrazione del time control con il bench di Stockfish 10
   results/                             output CSV/JSON delle calibrazioni (uno per host/data)
+tools/
+  new_gauntlet.py                      crea una nuova cartella di gauntlet scegliendo i motori
+  sync_repo.py                         sincronizza la cartella di lavoro CCRL\ con questo repo
+  gauntlet_template/scripts/           script canonici da cui nasce ogni gauntlet
 tournaments/
-  <AAAA-MM-GG>_<Motore>_<ver>_4CPU/
+  <AAAA-MM-GG>_<Motore>_<ver>_<N>CPU/
     scripts/                           driver del gauntlet e script di avvio/stop/risultati
     config/                            README di configurazione, elenco motori, rating
-results/gauntlets/                     risultati dei gauntlet (PGN, tabelle, log)
+results/gauntlets/<nome>/              summary.md, results.csv, all_games.pgn, pgn\node*.pgn
 engines/REPORT.md                      motori usati: versioni, release, asset, SHA256, opzioni UCI
+engines/uci_options/<motore>.txt       opzioni UCI dichiarate da ogni motore
+```
+
+## tools
+
+Dalla cartella di lavoro `CCRL\` (i due script stanno anche li', con i rispettivi `.bat`):
+
+```
+python new_gauntlet.py --list                                  motori disponibili
+python new_gauntlet.py --seed Caissa_2.0                       Caissa contro tutti
+python new_gauntlet.py --seed Triumviratus_7.0 --exclude Caissa_2.0
+python new_gauntlet.py --seed Caissa_2.0 --threads 2 --tc 845+10 --games 20
+python sync_repo.py                                            copia tutto in questo repo
+python sync_repo.py --commit "messaggio" --push
 ```
 
 ## benchmark

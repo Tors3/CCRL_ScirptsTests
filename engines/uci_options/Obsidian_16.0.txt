@@ -1,0 +1,11 @@
+id name Obsidian 16.0
+option name Clear Hash type button
+option name Contempt type spin default 0 min 0 max 512
+option name ContemptOverrides type string default 
+option name Hash type spin default 64 min 1 max 33554432
+option name Minimal type string default false
+option name Move Overhead type spin default 10 min 0 max 1000
+option name MultiPV type spin default 1 min 1 max 224
+option name SyzygyPath type string default 
+option name Threads type spin default 1 min 1 max 1024
+option name UCI_Opponent type string default 

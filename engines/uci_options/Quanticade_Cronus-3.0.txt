@@ -1,0 +1,123 @@
+id name Quanticade Cronus 3.0
+option name Hash type spin default 16 min 4 max 524288
+option name Threads type spin default 1 min 1 max 1024
+option name MoveOverhead type spin default 10 min 0 max 5000
+option name EvalFile type string default hati.nnue
+option name Clear Hash type button
+option name RAZOR_MARGIN type spin default 266 min 1 max 532
+option name RFP_MARGIN type spin default 57 min 1 max 114
+option name RFP_BASE_MARGIN type spin default 26 min 1 max 52
+option name RFP_IMPROVING type spin default 62 min 1 max 124
+option name RFP_OPP_WORSENING type spin default 14 min 1 max 28
+option name FP_MULTIPLIER type spin default 137 min 1 max 274
+option name FP_ADDITION type spin default 163 min 1 max 326
+option name FP_HISTORY_DIVISOR type spin default 30 min 1 max 60
+option name NMP_RED_DIVISER type spin default 144 min 1 max 288
+option name NMP_BASE_ADD type spin default 189 min 1 max 378
+option name NMP_MULTIPLIER type spin default 20 min 1 max 40
+option name SEE_QUIET type spin default 41 min 1 max 82
+option name SEE_CAPTURE type spin default 29 min 1 max 58
+option name SEE_HISTORY_DIVISOR type spin default 39 min 1 max 78
+option name SE_PV_DOUBLE_MARGIN type spin default 1 min 0 max 300
+option name SE_DOUBLE_MARGIN type spin default 0 min 0 max 20
+option name SE_TRIPLE_MARGIN type spin default 37 min 1 max 74
+option name LMR_PV_NODE type spin default 870 min 1 max 1740
+option name LMR_HISTORY_QUIET type spin default 1171 min 1 max 2342
+option name LMR_HISTORY_NOISY type spin default 1068 min 1 max 2136
+option name LMR_WAS_IN_CHECK type spin default 853 min 1 max 1706
+option name LMR_IN_CHECK type spin default 1068 min 1 max 2136
+option name LMR_CUTNODE type spin default 1244 min 1 max 2488
+option name LMR_TT_DEPTH type spin default 1038 min 1 max 2076
+option name LMR_TT_PV type spin default 1073 min 1 max 2146
+option name LMR_TT_PV_CUTNODE type spin default 887 min 1 max 1774
+option name LMR_TT_SCORE type spin default 868 min 1 max 1736
+option name LMR_CUTOFF_CNT type spin default 809 min 1 max 1618
+option name LMR_IMPROVING type spin default 988 min 1 max 1976
+option name LMR_DEEPER_MARGIN type spin default 30 min 1 max 60
+option name LMP_BETA_MARGIN type spin default 15 min 1 max 30
+option name ASP_WINDOW type spin default 13 min 1 max 26
+option name QS_FUTILITY_THRESHOLD type spin default 92 min 1 max 184
+option name MO_SEE_THRESHOLD type spin default 119 min 1 max 238
+option name LMR_QUIET_HIST_DIV type spin default 6320 min 1 max 12640
+option name LMR_CAPT_HIST_DIV type spin default 8316 min 1 max 16632
+option name ASP_WINDOW_DIVISER type spin default 31548 min 1 max 63096
+option name ASP_WINDOW_MULTIPLIER type spin default 462 min 1 max 924
+option name HINDSIGH_REDUCTION_ADD type spin default 2905 min 1 max 5810
+option name HINDSIGH_REDUCTION_RED type spin default 2113 min 1 max 4226
+option name HINDSIGN_REDUCTION_EVAL_MARGIN type spin default 93 min 1 max 186
+option name PROBCUT_MARGIN type spin default 208 min 1 max 416
+option name PROBCUT_SEE_THRESHOLD type spin default 101 min 1 max 202
+option name MO_SEE_HISTORY_DIVISER type spin default 33 min 1 max 66
+option name MO_QUIET_HIST_MULT type spin default 1087 min 1 max 2174
+option name MO_CONT1_HIST_MULT type spin default 940 min 1 max 1880
+option name MO_CONT2_HIST_MULT type spin default 940 min 1 max 1880
+option name MO_CONT4_HIST_MULT type spin default 1075 min 1 max 2150
+option name MO_PAWN_HIST_MULT type spin default 989 min 1 max 1978
+option name MO_CAPT_HIST_MULT type spin default 1039 min 1 max 2078
+option name MO_MVV_MULT type spin default 1011 min 1 max 2022
+option name LMR_DEEPER_MULT type string default 1.937100
+option name QUIET_HISTORY_MALUS_MAX type spin default 1011 min 1 max 2022
+option name QUIET_HISTORY_BONUS_MAX type spin default 1226 min 1 max 2452
+option name QUIET_HISTORY_BASE_BONUS type spin default 11 min 0 max 40
+option name QUIET_HISTORY_FACTOR_BONUS type spin default 148 min 1 max 296
+option name QUIET_HISTORY_BASE_MALUS type spin default 7 min 0 max 40
+option name QUIET_HISTORY_FACTOR_MALUS type spin default 202 min 1 max 404
+option name QUIET_HISTORY_MAX_TT type spin default 1264 min 1 max 2528
+option name QUIET_HISTORY_TT_FACTOR type spin default 134 min 1 max 268
+option name QUIET_HISTORY_TT_BASE type spin default 71 min 1 max 142
+option name CAPTURE_HISTORY_MALUS_MAX type spin default 943 min 1 max 1886
+option name CAPTURE_HISTORY_BONUS_MAX type spin default 1575 min 1 max 3150
+option name CAPTURE_HISTORY_BASE_BONUS type spin default 11 min 0 max 40
+option name CAPTURE_HISTORY_FACTOR_BONUS type spin default 150 min 1 max 300
+option name CAPTURE_HISTORY_BASE_MALUS type spin default 10 min 0 max 40
+option name CAPTURE_HISTORY_FACTOR_MALUS type spin default 234 min 1 max 468
+option name CONT_HISTORY_MALUS_MAX type spin default 1364 min 1 max 2728
+option name CONT_HISTORY_BONUS_MAX type spin default 2329 min 1 max 4658
+option name CONT_HISTORY_BASE_BONUS type spin default 9 min 0 max 40
+option name CONT_HISTORY_FACTOR_BONUS type spin default 193 min 1 max 386
+option name CONT_HISTORY_BASE_MALUS type spin default 8 min 0 max 40
+option name CONT_HISTORY_FACTOR_MALUS type spin default 261 min 1 max 522
+option name PAWN_HISTORY_MALUS_MAX type spin default 1024 min 1 max 2048
+option name PAWN_HISTORY_BONUS_MAX type spin default 1314 min 1 max 2628
+option name PAWN_HISTORY_BASE_BONUS type spin default 9 min 0 max 40
+option name PAWN_HISTORY_FACTOR_BONUS type spin default 194 min 1 max 388
+option name PAWN_HISTORY_BASE_MALUS type spin default 9 min 0 max 40
+option name PAWN_HISTORY_FACTOR_MALUS type spin default 149 min 1 max 298
+option name CORR_HISTORY_MINMAX type spin default 317 min 1 max 634
+option name PAWN_CORR_HISTORY_MULTIPLIER type spin default 35 min 1 max 70
+option name NON_PAWN_CORR_HISTORY_MULTIPLIER type spin default 22 min 1 max 44
+option name FIFTY_MOVE_SCALING type spin default 193 min 1 max 386
+option name SEE_PAWN type spin default 61 min 1 max 122
+option name SEE_KNIGHT type spin default 312 min 1 max 624
+option name SEE_BISHOP type spin default 301 min 1 max 602
+option name SEE_ROOK type spin default 547 min 1 max 1094
+option name SEE_QUEEN type spin default 1371 min 1 max 2742
+option name MVV_PAWN type spin default 131 min 1 max 262
+option name MVV_KNIGHT type spin default 362 min 1 max 724
+option name MVV_BISHOP type spin default 308 min 1 max 616
+option name MVV_ROOK type spin default 486 min 1 max 972
+option name MVV_QUEEN type spin default 1328 min 1 max 2656
+option name LMP_MARGIN_WORSENING_BASE type string default 1.468258
+option name LMP_MARGIN_WORSENING_FACTOR type string default 0.387436
+option name LMP_MARGIN_WORSENING_POWER type string default 1.615748
+option name LMP_MARGIN_IMPROVING_BASE type string default 2.829164
+option name LMP_MARGIN_IMPROVING_FACTOR type string default 0.874217
+option name LMP_MARGIN_IMPROVING_POWER type string default 1.991472
+option name LMR_OFFSET_QUIET type string default 0.730752
+option name LMR_DIVISOR_QUIET type string default 1.690837
+option name LMR_OFFSET_NOISY type string default -0.117528
+option name LMR_DIVISOR_NOISY type string default 2.532354
+option name DEF_TIME_MULTIPLIER type string default 0.090876
+option name DEF_INC_MULTIPLIER type string default 0.848259
+option name MAX_TIME_MULTIPLIER type string default 0.747583
+option name SOFT_LIMIT_MULTIPLIER type string default 0.778114
+option name NODE_TIME_MULTIPLIER type string default 2.409490
+option name NODE_TIME_ADDITION type string default 0.463134
+option name NODE_TIME_MIN type string default 0.546068
+option name EVAL_TIME_ADDITION type string default 1.196384
+option name EVAL_TIME_MULTIPLIER type string default 0.044242
+option name BESTMOVE_SCALE0 type string default 2.433000
+option name BESTMOVE_SCALE1 type string default 1.360946
+option name BESTMOVE_SCALE2 type string default 1.104603
+option name BESTMOVE_SCALE3 type string default 0.898943
+option name BESTMOVE_SCALE4 type string default 0.713091

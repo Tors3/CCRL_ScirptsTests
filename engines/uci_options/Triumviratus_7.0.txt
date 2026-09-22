@@ -1,0 +1,13 @@
+id name Triumviratus - 7.0 2026-09-10
+option name Hash type spin default 64 min 1 max 65536
+option name Threads type spin default 1 min 1 max 40
+option name MultiPV type spin default 1 min 1 max 64
+option name UCI_ShowWDL type check default false
+option name Clear Hash type button
+option name UCI_EngineAbout type string default Triumviratus - 7.0 build 2026-09-10 by Francesco Torsello
+option name Move Overhead type spin default 50 min 0 max 5000
+option name EvalFile type string default nn-legio-septima.nnue
+option name SyzygyPath type string default <empty>
+option name SyzygyProbeDepth type spin default 1 min 1 max 100
+option name Syzygy50MoveRule type check default true
+option name SyzygyProbeLimit type spin default 7 min 0 max 7

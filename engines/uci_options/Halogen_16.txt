@@ -1,0 +1,8 @@
+id name Halogen 16.0.0
+option name Clear Hash type button
+option name UCI_Chess960 type check default false
+option name Hash type spin default 32 min 1 max 262144
+option name Threads type spin default 1 min 1 max 1024
+option name MultiPV type spin default 1 min 1 max 256
+option name SyzygyPath type string default <empty>
+option name OutputLevel type combo default Default var None var Minimal var Default

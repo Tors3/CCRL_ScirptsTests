@@ -1,0 +1,12 @@
+id name PZChessBot v7.1
+option name Hash type spin default 16 min 1 max 262144
+option name Threads type spin default 1 min 1 max 512
+option name Quiet type check default false
+option name Move Overhead type spin default 0 min 0 max 10000
+option name softnodes type check default false
+option name datagen type check default false
+option name UCI_Chess960 type check default false
+option name UCI_ShowWDL type check default false
+option name SyzygyPath type string default <empty>
+option name SyzygyProbeDepth type spin default 1 min 1 max 100
+option name SyzygyProbeLimit type spin default 7 min 1 max 7

@@ -239,6 +239,38 @@ def apply_job_affinity(group, mask):
     return None
 
 
+def fix_resume_config(cfg_json, lane):
+    """Riallinea il .json di ripresa ai parametri attuali.
+
+    fastchess salva nel .json l'intera configurazione del match, compresa la
+    concurrency: riprendendo un match creato quando una corsia giocava 5
+    partite in parallelo, quella corsia ne riaprirebbe 5 mentre le altre ne
+    giocano 1 ciascuna -> CPU e RAM sovraccariche (con Hash grandi i motori
+    non riescono ad allocare e crashano). Qui si forzano i valori correnti."""
+    try:
+        d = json.load(open(cfg_json, encoding="utf-8"))
+    except Exception as e:
+        log(f"ATTENZIONE: {os.path.basename(cfg_json)} illeggibile ({e}), il match riparte da zero", lane)
+        return False
+    changed = []
+    if d.get("concurrency") != int(CONCURRENCY):
+        changed.append(f"concurrency {d.get('concurrency')} -> {CONCURRENCY}")
+        d["concurrency"] = int(CONCURRENCY)
+    # nel .json le opzioni sono coppie ["Nome", "valore"]
+    for e in d.get("engines", []):
+        for o in e.get("options", []):
+            if not (isinstance(o, list) and len(o) == 2):
+                continue
+            for key, val in (("Threads", THREADS), ("Hash", HASH)):
+                if o[0] == key and str(o[1]) != str(val):
+                    changed.append(f"{e.get('name')} {key} {o[1]} -> {val}")
+                    o[1] = str(val)
+    if changed:
+        json.dump(d, open(cfg_json, "w", encoding="utf-8"), indent=4)
+        log("ripresa, parametri riallineati: " + "; ".join(changed), lane)
+    return True
+
+
 def run(cmd, cwd, lane=None):
     log("CMD: " + subprocess.list2cmdline(cmd), lane)
     if DRY_RUN:
@@ -330,7 +362,7 @@ def main():
                 done_l += done
                 continue
 
-            if os.path.exists(cfg_json) and done > 0:
+            if os.path.exists(cfg_json) and done > 0 and fix_resume_config(cfg_json, lane):
                 # il .json contiene anche il PGN con cui il match era partito: fastchess
                 # riprende a scrivere li', quindi resta un solo scrittore per file
                 log(f"pass {p} {label}: RIPRESA da {done}/{games_per_match} partite ({os.path.basename(cfg_json)})", lane)

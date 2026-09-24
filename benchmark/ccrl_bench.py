@@ -225,8 +225,15 @@ def find_binaries():
                     continue
                 if not SF10_PATH_RE.search(os.path.relpath(path, root)):
                     continue
+                # 32-bit builds are far slower and would inflate the factor:
+                # never pick them (stockfish_10_x32.exe must not pass as "x64")
+                if re.search(r"x32|32bit|_32\b|win32|i386|x86(?![-_]?64)", fl):
+                    others.append(path)
+                    continue
                 build = "bmi2" if "bmi2" in fl else "popcnt" if "popcnt" in fl else "x64"
-                found.setdefault(build, path)
+                # prefer a name that says x64 over an ambiguous one
+                if build not in found or ("x64" in fl and "x64" not in os.path.basename(found[build]).lower()):
+                    found[build] = path
     return found, others
 
 
@@ -275,6 +282,13 @@ def check_binary(sf):
         sys.exit(f"Unable to start {sf}: {e}")
     if not name.startswith("Stockfish 10"):
         print(f"WARNING: the engine identifies itself as '{name}', not Stockfish 10!")
+    # Stockfish 10 reports its word size in the id name ("Stockfish 10 64").
+    # A 32-bit build runs at roughly half the speed and would inflate the
+    # factor (and so the time control), so stop instead of measuring it.
+    if re.search(r"\b32\b", name) or (not re.search(r"\b64\b", name)
+                                      and re.search(r"x32|32bit|win32|i386", os.path.basename(sf).lower())):
+        sys.exit(f"'{name}' ({os.path.basename(sf)}) is a 32-bit build: use the 64-bit one "
+                 f"(--sf path\\to\\stockfish_10_x64.exe). A 32-bit binary would inflate the factor.")
     return name
 
 

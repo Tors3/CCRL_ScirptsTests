@@ -41,6 +41,13 @@ set NODE=%~1
 if "%NODE%"=="" set NODE=0
 if not defined GAUNTLET_DIR set GAUNTLET_DIR=%~dp0..
 cd /d "%GAUNTLET_DIR%"
+rem BG=1 (impostato da gauntlet_bg.bat): driver senza console, sopravvive alla
+rem chiusura della finestra e alla disconnessione RDP. Altrimenti gira in primo piano.
+if "%BG%"=="1" (
+  start "" /B pythonw "%~dp0run_node.py"
+  echo [node %NODE%] driver avviato in background.
+  exit /b 0
+)
 python "%~dp0run_node.py"
 echo.
 echo [node %NODE%] driver terminato con codice %ERRORLEVEL%.

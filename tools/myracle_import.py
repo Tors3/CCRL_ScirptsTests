@@ -116,24 +116,102 @@ def build_entries(selected, threads, hash_mb, syzygy):
     return entries
 
 
+def load_json(path):
+    return json.load(open(path, encoding="utf-8")) if os.path.exists(path) else None
+
+
+def save_json(path, data):
+    if not os.path.exists(path + ".bak"):
+        shutil.copy2(path, path + ".bak")
+    json.dump(data, open(path, "w", encoding="utf-8"), indent="\t")
+
+
+def free_slot(lst, key):
+    """Myracle tiene un numero fisso di slot: si riempie il primo libero
+    (appendere in fondo non funziona, la GUI riscrive il file alla chiusura)."""
+    for i, item in enumerate(lst):
+        if not item.get(key):
+            return i
+    return None
+
+
 def add_time_control(cfg_dir, base, inc, name):
-    """Aggiunge un time control alla lista della GUI, se non c'e' gia'."""
+    """Scrive il time control in uno slot libero della lista della GUI."""
     p = os.path.join(cfg_dir, "time_control.json")
-    if not os.path.exists(p):
+    d = load_json(p)
+    if d is None:
         return None
-    d = json.load(open(p, encoding="utf-8"))
     lst = d.get("time_control", [])
     for t in lst:
         if t.get("name") == name:
-            return f"time control '{name}' gia' presente"
-    lst.append({
+            return f"time control '{name}': gia' presente"
+    i = free_slot(lst, "name")
+    if i is None:
+        return f"time control '{name}': nessuno slot libero, aggiungerlo a mano"
+    lst[i] = {
         "time_control": [{"moves": 0, "base": base, "increment": inc, "gui_base_minutes": False}],
         "name": name, "mode": "tournament", "fixed_time": 0, "nodes": 0, "depth": 0, "margin_ms": 50,
-    })
+    }
     d["time_control"] = lst
-    shutil.copy2(p, p + ".bak")
-    json.dump(d, open(p, "w", encoding="utf-8"), indent="\t")
-    return f"aggiunto time control '{name}' ({base}s + {inc}s)"
+    save_json(p, d)
+    return f"time control '{name}' ({base}s + {inc}s) nello slot {i}"
+
+
+def add_book(cfg_dir, myracle_dir, src_book, sequential=True, max_plies=0):
+    """Copia il libro in myracle\books\ e lo registra in uno slot libero."""
+    p = os.path.join(cfg_dir, "book.json")
+    d = load_json(p)
+    if d is None or not os.path.exists(src_book):
+        return None
+    dst_dir = os.path.join(myracle_dir, "books")
+    os.makedirs(dst_dir, exist_ok=True)
+    dst = os.path.join(dst_dir, os.path.basename(src_book))
+    if not os.path.exists(dst) or os.path.getsize(dst) != os.path.getsize(src_book):
+        shutil.copy2(src_book, dst)
+    rel = "books/" + os.path.basename(src_book)
+    lst = d.get("books", [])
+    for b in lst:
+        if b.get("filename") == rel:
+            b["sequential"], b["max_plies"] = sequential, max_plies
+            save_json(p, d)
+            return f"libro '{rel}': gia' presente, impostato sequential={sequential}"
+    i = free_slot(lst, "filename")
+    if i is None:
+        return f"libro '{rel}': nessuno slot libero, aggiungerlo a mano"
+    lst[i] = {"filename": rel, "max_plies": max_plies, "sequential": sequential}
+    d["books"] = lst
+    save_json(p, d)
+    return f"libro '{rel}' nello slot {i} (sequential={sequential}, max_plies={max_plies or 'tutte'})"
+
+
+def add_adjudication(cfg_dir, name):
+    """Set di aggiudicazione identico a quello usato con fastchess."""
+    p = os.path.join(cfg_dir, "adjudication.json")
+    d = load_json(p)
+    if d is None:
+        return None
+    lst = d.get("adjudication", [])
+    rules = {
+        "draw_enabled": True, "draw_move_number": 35, "draw_move_count": 8, "draw_threshold_cp": 10,
+        "resign_enabled": True, "resign_move_count": 4, "resign_threshold_cp": 600, "resign_both": True,
+        "tb_enabled": True, "tb_max_men": 5,
+        "movecount_enabled": False, "movecount": 200, "movecount_threshold_cp": 10,
+    }
+    for a in lst:
+        if a.get("name") == name:
+            a["adjudication"] = rules
+            save_json(p, d)
+            return f"aggiudicazione '{name}': aggiornata"
+    i = free_slot(lst, "name")
+    if i is None:
+        lst.append({"name": name, "adjudication": rules})
+        i = len(lst) - 1
+    else:
+        lst[i] = {"name": name, "adjudication": rules}
+    d["adjudication"] = lst
+    save_json(p, d)
+    return (f"aggiudicazione '{name}' nello slot {i}: patta mossa>=35 entro 10cp per 8 mosse, "
+            f"resa 600cp per 4 mosse (entrambi), tablebase 5 pezzi")
 
 
 def main():
@@ -146,6 +224,11 @@ def main():
     ap.add_argument("--no-syzygy", action="store_true", help="non impostare SyzygyPath")
     ap.add_argument("--no-tc", action="store_true", help="non aggiungere il time control CCRL")
     ap.add_argument("--tc", default="1690+19", help="time control da aggiungere (default 1690+19)")
+    ap.add_argument("--no-book", action="store_true", help="non registrare il libro di aperture")
+    ap.add_argument("--book", default=os.path.join(CCRL_ROOT, "books", "avt-book-2026.pgn"),
+                    help="libro da copiare in myracle\\books\\ e registrare")
+    ap.add_argument("--random-book", action="store_true", help="aperture in ordine casuale invece che sequenziale")
+    ap.add_argument("--no-adjudication", action="store_true", help="non aggiungere il set di aggiudicazione")
     ap.add_argument("--replace-all", action="store_true",
                     help="sostituisce l'intera lista invece di fondersi con quella esistente")
     ap.add_argument("--dry-run", action="store_true")
@@ -203,13 +286,18 @@ def main():
         f.write(data)
     print(f"scritto: {target}")
 
+    msgs = []
     if not a.no_tc:
         m = re.match(r"(\d+)\+(\d+)", a.tc)
         if m:
-            msg = add_time_control(cfg_dir, int(m.group(1)), int(m.group(2)), f"CCRL 40/15 ({a.tc})")
-            if msg:
-                print(msg)
-    print("\nRiaprire Myracle: i motori compaiono nella lista senza aggiungerli a mano.")
+            msgs.append(add_time_control(cfg_dir, int(m.group(1)), int(m.group(2)), f"CCRL 40/15 ({a.tc})"))
+    if not a.no_book:
+        msgs.append(add_book(cfg_dir, a.myracle, a.book, sequential=not a.random_book))
+    if not a.no_adjudication:
+        msgs.append(add_adjudication(cfg_dir, "CCRL gauntlet (draw 35/8/10, resign 4/600, syzygy 5)"))
+    for m in [x for x in msgs if x]:
+        print("  " + m)
+    print("\nRiaprire Myracle: motori, time control, libro e aggiudicazione sono gia' in lista.")
 
 
 if __name__ == "__main__":

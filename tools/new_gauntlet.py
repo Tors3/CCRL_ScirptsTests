@@ -37,6 +37,7 @@ import json
 import os
 import re
 import shutil
+import subprocess
 import sys
 
 CCRL_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -115,6 +116,8 @@ def main():
                                 epilog=__doc__)
     p.add_argument("--list", action="store_true", help="elenca i motori disponibili ed esce")
     p.add_argument("--seed", help="motore sotto test (cartella in engines\\)")
+    p.add_argument("--seeds", help="piu' motori sotto test, separati da virgola: giocano tutti contro tutti "
+                                   "e ognuno contro ogni avversario (gli avversari non giocano fra loro)")
     p.add_argument("--opponents", help="avversari, separati da virgola (default: tutti gli altri)")
     p.add_argument("--exclude", help="motori da escludere, separati da virgola")
     p.add_argument("--mode", choices=["gauntlet", "roundrobin"], default="gauntlet")
@@ -126,12 +129,18 @@ def main():
     p.add_argument("--passes", type=int, default=2, help="passate su tutti gli avversari (default 2)")
     p.add_argument("--concurrency", type=int, default=None,
                    help="partite in parallelo per nodo (default: 20 / threads)")
+    p.add_argument("--ccrl-list", dest="list_name", default="40/15",
+                   help="lista CCRL, finisce nel tag Event (default 40/15; es. Blitz)")
+    p.add_argument("--register-task", action="store_true",
+                   help="registra un'attivita' pianificata Windows per avviarlo fuori da ogni sessione")
     p.add_argument("--name", help="nome della cartella (default: <data>_<seed>_<threads>CPU)")
     p.add_argument("--no-syzygy", action="store_true", help="non passare SyzygyPath ai motori")
     p.add_argument("--force", action="store_true", help="sovrascrive config e script se la cartella esiste")
     a = p.parse_args()
 
     engines = discover_engines()
+    if a.seeds and not a.seed:
+        a.seed = split_list(a.seeds)[0]
     if a.list or not a.seed:
         print(f"{'cartella':26} {'nome nel PGN':24} {'Syzygy':7} id name")
         for k, e in engines.items():
@@ -141,23 +150,27 @@ def main():
         return
 
     seed_key = resolve(a.seed, engines)
+    seed_keys = [resolve(x, engines) for x in split_list(a.seeds)] if a.seeds else [seed_key]
     excluded = {resolve(x, engines) for x in split_list(a.exclude)}
     if a.opponents:
         opp_keys = [resolve(x, engines) for x in split_list(a.opponents)]
     else:
         opp_keys = [k for k in engines if k != seed_key]
-    opp_keys = [k for k in opp_keys if k != seed_key and k not in excluded]
+    opp_keys = [k for k in opp_keys if k not in seed_keys and k not in excluded]
     if not opp_keys:
         sys.exit("ERRORE: nessun avversario selezionato")
 
     threads = a.threads
     hash_mb = a.hash if a.hash else 512 * threads
-    concurrency = a.concurrency if a.concurrency else max(1, 20 // threads)
-    # partite per accoppiamento = passes x rounds_per_pass x 2 colori x 2 nodi
-    if a.games % (a.passes * 4) != 0:
-        sys.exit(f"ERRORE: --games {a.games} non e' divisibile per passes x 4 "
-                 f"({a.passes * 4}): scegliere un multiplo (es. {a.passes * 4 * 5})")
-    rounds_per_pass = a.games // (a.passes * 4)
+    lanes = a.concurrency if a.concurrency else max(1, 20 // threads)   # partite per nodo
+    # partite per accoppiamento = passes x aperture x 2 colori; le aperture si dividono fra i
+    # 2 nodi, anche in modo diseguale (15 -> "8,7")
+    if a.games % (a.passes * 2) != 0:
+        sys.exit(f"ERRORE: --games {a.games} deve essere un multiplo di passes x 2 ({a.passes * 2}): "
+                 f"ogni apertura si gioca con entrambi i colori")
+    openings = a.games // (a.passes * 2)
+    rpp_n0, rpp_n1 = (openings + 1) // 2, openings // 2
+    rounds_per_pass = str(rpp_n0) if rpp_n0 == rpp_n1 else f"{rpp_n0},{rpp_n1}"
 
     name = a.name or f"{datetime.date.today():%Y-%m-%d}_{seed_key}_{threads}CPU"
     gdir = os.path.join(GAUNTLETS_DIR, name)
@@ -168,7 +181,10 @@ def main():
 
     seed = engines[seed_key]
     opponents = [engines[k] for k in opp_keys]
-    json.dump({"seed": seed, "opponents": opponents},
+    cfg_out = {"seed": seed, "opponents": opponents}
+    if len(seed_keys) > 1:
+        cfg_out["seeds"] = [engines[k] for k in seed_keys]
+    json.dump(cfg_out,
               open(os.path.join(gdir, "config", "engines.json"), "w", encoding="utf-8"),
               indent=1, ensure_ascii=False)
 
@@ -186,24 +202,33 @@ def main():
         "HASH": hash_mb,
         "THREADS": threads,
         "TC": a.tc,
-        "CONCURRENCY": concurrency,
+        "LANES": lanes,
+        "CONCURRENCY": 1,
         "PASSES": a.passes,
         "ROUNDS_PER_PASS": rounds_per_pass,
-        "EVENT": f"CCRL 40/15 {a.mode} {seed['name']} {threads}CPU",
+        "EVENT": f"CCRL {a.list_name} {a.mode} {seed['name']} {threads}CPU",
         "SYZYGY_PATH": "" if (a.no_syzygy or not os.path.isdir(tb)) else tb,
     })
 
-    n_pair = len(opponents) if a.mode == "gauntlet" else (len(opponents) + 1) * len(opponents) // 2
+    ns = len(seed_keys)
+    n_pair = (ns * (ns - 1) // 2 + ns * len(opponents)) if a.mode == "gauntlet" \
+        else (len(opponents) + 1) * len(opponents) // 2
     print(f"Creato: {gdir}")
     print(f"  modalita'      : {a.mode}")
-    print(f"  sotto test     : {seed['name']}  ({os.path.relpath(seed['cmd'], CCRL_ROOT)})")
+    print(f"  sotto test     : {', '.join(engines[k]['name'] for k in seed_keys)}")
     print(f"  avversari      : {len(opponents)} -> {', '.join(e['name'] for e in opponents)}")
     print(f"  accoppiamenti  : {n_pair}, {a.games} partite ciascuno = {n_pair * a.games} partite totali")
     print(f"  condizioni     : tc={a.tc}  Threads={threads}  Hash={hash_mb} MB  "
-          f"concurrency={concurrency}/nodo  ({a.passes} passate x {rounds_per_pass} aperture)")
+          f"{lanes} partite/nodo  ({a.passes} passate x {rounds_per_pass} aperture per nodo)")
     print(f"  Syzygy         : {'no' if a.no_syzygy or not os.path.isdir(tb) else tb}")
-    print(f"\nControllare i parametri in scripts\\gauntlet.bat, poi avviare con:")
-    print(f"  {os.path.join(gdir, 'scripts', 'start_all.bat')}")
+    task = f"CCRL Gauntlet {name}"
+    if a.register_task:
+        bat = os.path.join(gdir, "scripts", "start_all_task.bat")
+        r = subprocess.run(["schtasks", "/create", "/tn", task, "/tr", f'cmd /c "{bat}"',
+                            "/sc", "once", "/st", "00:00", "/f"], capture_output=True, text=True)
+        print(f"  attivita'      : {task} ({'registrata' if r.returncode == 0 else 'ERRORE: ' + r.stderr.strip()})")
+    print(f"\nControllare i parametri in scripts\\gauntlet.bat, poi avviare (indipendente da ogni sessione) con:")
+    print(f'  schtasks /run /tn "{task}"' if a.register_task else f"  {os.path.join(gdir, 'scripts', 'start_all.bat')}")
 
 
 if __name__ == "__main__":

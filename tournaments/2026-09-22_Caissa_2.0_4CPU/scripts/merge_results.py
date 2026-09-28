@@ -43,6 +43,15 @@ def parse_pgn(path):
             yield headers, " ".join(moves)
 
 
+def slot(h):
+    """(nodo, passata, round) della partita: Event "... nodeN passP" + Round (match interi)
+    oppure Event "... nodeN passP rR" (partite singole). None se non riconosciuto."""
+    m = re.search(r"node(\d+) pass(\d+)(?: r(\d+))?$", h.get("Event", ""))
+    if not m:
+        return None
+    return int(m.group(1)), int(m.group(2)), int(m.group(3) or h.get("Round", "0") or 0)
+
+
 def elo_from_score(s):
     if s <= 0:
         return -math.inf
@@ -105,9 +114,24 @@ def main():
     pair_check = Counter()           # (opponent, event, round, file) -> partite
     durations = []
     unfinished = 0
+    # Una ripresa a meta' di un round fa rigiocare a fastchess l'intero round: la
+    # partita gia' giocata compare due volte. Si tiene la prima (per GameEndTime).
+    first_seen = {}
+    for p in pgns:
+        for h, _ in parse_pgn(p):
+            if h.get("Result") in ("1-0", "0-1", "1/2-1/2"):
+                k = (slot(h), h.get("White"), h.get("Black"))
+                e = h.get("GameEndTime", "")
+                if k not in first_seen or e < first_seen[k]:
+                    first_seen[k] = e
+    dupes = 0
     with open(os.path.join(res_dir, "all_games.pgn"), "w", encoding="utf-8") as out:
         for p in pgns:
             for h, mv in parse_pgn(p):
+                k = (slot(h), h.get("White"), h.get("Black"))
+                if h.get("Result") in ("1-0", "0-1", "1/2-1/2") and first_seen.get(k) != h.get("GameEndTime", ""):
+                    dupes += 1
+                    continue
                 out.write("".join(f'[{k} "{v}"]\n' for k, v in h.items()) + "\n" + mv + "\n\n")
                 r = h.get("Result", "*")
                 if r not in ("1-0", "0-1", "1/2-1/2"):
@@ -127,7 +151,7 @@ def main():
                 per_opp[opp].append(sc)
                 per_color["white" if w == seed else "black"].append(sc)
                 terminations[(opp, h.get("Termination", "?"))] += 1
-                pair_check[(opp, h.get("Event", ""), h.get("Round", ""), os.path.basename(p))] += 1
+                pair_check[(opp, slot(h))] += 1
 
     ratings = {}
     rp = os.path.join(gd, "config", "ratings.csv")
@@ -150,7 +174,7 @@ def main():
         perf = (avg_r, s, n, avg_r + elo_from_score(s))
 
     lines = [f"# Gauntlet {seed} - risultati", "",
-             f"Sorgenti: {', '.join(os.path.basename(p) for p in pgns)} | partite valide: {total['games']} | non terminate/ignorate: {unfinished}", "",
+             f"Sorgenti: {', '.join(os.path.basename(p) for p in pgns)} | partite valide: {total['games']} | non terminate/ignorate: {unfinished} | doppioni ignorati: {dupes}", "",
              "| Avversario | Partite | +W | =D | -L | Punti | % | Elo diff (±95%) |", "|---|---|---|---|---|---|---|---|"]
     lines += [fmt_row(r) for r in rows + [total]]
     lines += ["", "Per colore del motore sotto test:"]
@@ -176,7 +200,7 @@ def main():
     odd = [(k, n) for k, n in pair_check.items() if n != 2]
     lines += ["", "## Controllo coppie (ogni apertura = 2 partite a colori invertiti)", ""]
     lines.append("OK: tutte le coppie sono complete." if not odd else
-                 "ATTENZIONE, coppie incomplete/duplicate (avversario, event, round, file -> partite):")
+                 "ATTENZIONE, coppie incomplete/duplicate (avversario, (nodo, passata, round) -> partite):")
     for k, n in sorted(odd):
         lines.append(f"- {k} -> {n}")
     open(os.path.join(res_dir, "summary.md"), "w", encoding="utf-8").write("\n".join(lines) + "\n")

@@ -4,24 +4,28 @@ rem =====================================================================
 rem  PARAMETRI DEL GAUNTLET - modificare qui
 rem =====================================================================
 set MODE=gauntlet
-rem   gauntlet  = Caissa contro ogni avversario (19 accoppiamenti, 760 partite)
-rem   roundrobin= tutti contro tutti (190 accoppiamenti, 7600 partite!)
+rem   gauntlet  = il motore sotto test contro ogni avversario
+rem   roundrobin= tutti contro tutti (n*(n-1)/2 accoppiamenti)
 set HASH=2048
 set THREADS=4
+rem Time control fastchess (base+incremento in secondi), da ccrl_bench.py.
 set TC=1690+19
 rem corsie indipendenti per nodo x partite in parallelo dentro una corsia:
-rem LANES x CONCURRENCY x THREADS = core fisici del nodo (5 x 1 x 4 = 20).
+rem LANES x THREADS <= core fisici del nodo (20). Aperture per nodo: ROUNDS_PER_PASS (es. "8,7").
 rem Piu' corsie = nessun tempo morto a fine match (ogni corsia ha il suo fastchess).
 set LANES=5
 set CONCURRENCY=1
 set PASSES=2
+rem Passate da giocare davvero (<= PASSES): permette di ridurre il torneo a
+rem meta' senza spostare le aperture gia' assegnate.
+set PLAY_PASSES=
 set ROUNDS_PER_PASS=5
 set LOG_LEVEL=info
 rem mask di affinity relativa al nodo NUMA (un thread per core fisico), applicata
 rem anche come limite di Job Object: deve coincidere con quella in start_node*.bat
 set AFFINITY_MASK=0x5555555555
 set EVENT=CCRL 40/15 gauntlet Caissa 2.0 4CPU
-set SITE=Xeon-Server
+set SITE=Milan
 rem --- Aggiudicazioni fastchess (ATTIVE): patta se dalla mossa 35 entrambi i motori restano entro +-10 cp
 rem     per 8 mosse consecutive; resa se entrambi concordano su |score| >= 600 cp per 4 mosse consecutive.
 set EXTRA_ARGS=-draw movenumber=35 movecount=8 score=10 -resign movecount=4 score=600 twosided=true

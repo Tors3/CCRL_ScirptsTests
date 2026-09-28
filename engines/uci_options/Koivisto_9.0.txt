@@ -1,0 +1,8 @@
+id name Koivisto 9.0
+option name Hash type spin default 16 min 1 max 65536
+option name Threads type spin default 1 min 1 max 256
+option name OwnBook type check default false
+option name BookPath type string
+option name SyzygyPath type string default
+option name MoveOverhead type spin default 0 min 0 max 10000
+option name MoveOverheadType type combo default PerMove var PerMove var PerGame

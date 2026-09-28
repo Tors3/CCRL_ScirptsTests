@@ -1,0 +1,14 @@
+id name Horsie 1.1.0
+option name Threads type spin default 1 min 1 max 512
+option name Hash type spin default 32 min 1 max 1048576
+option name MultiPV type spin default 1 min 1 max 256
+option name MoveOverhead type spin default 25 min 1 max 5000
+option name UCI_Chess960 type check default false
+option name UCI_ShowWDL type check default true
+option name SEMinDepth type spin default 5 min 3 max 7
+option name NMPMinDepth type spin default 6 min 3 max 9
+option name RazoringMaxDepth type spin default 4 min 2 max 6
+option name RFPMaxDepth type spin default 6 min 3 max 9
+option name ShallowMaxDepth type spin default 9 min 5 max 13
+option name IIRMinDepth type spin default 3 min 2 max 6
+option name AspWindow type spin default 12 min 7 max 17

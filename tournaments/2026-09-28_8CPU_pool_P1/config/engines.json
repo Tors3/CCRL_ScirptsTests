@@ -1,0 +1,169 @@
+{
+ "seed": {
+  "name": "PlentyChess 8.0.0",
+  "folder": "PlentyChess_8.0.0",
+  "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\PlentyChess_8.0.0\\PlentyChess-8.0.0-windows-avx2.exe",
+  "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\PlentyChess_8.0.0",
+  "options": {
+   "Threads": "${THREADS}",
+   "Hash": "${HASH}",
+   "Ponder": "false"
+  },
+  "uci_id": "PlentyChess 8.0.0",
+  "has_syzygy": true
+ },
+ "opponents": [
+  {
+   "name": "Obsidian 16.0",
+   "folder": "Obsidian_16.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Obsidian_16.0\\Obsidian160-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Obsidian_16.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Obsidian 16.0",
+   "has_syzygy": true
+  },
+  {
+   "name": "Horsie 1.1",
+   "folder": "Horsie_1.1",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Horsie_1.1\\horsie-1_1-v3.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Horsie_1.1",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Horsie 1.1.0",
+   "has_syzygy": false
+  },
+  {
+   "name": "Lizard 11.2",
+   "folder": "Lizard_11.2",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Lizard_11.2\\Lizard-11_2-win.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Lizard_11.2",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Lizard 11.2.0",
+   "has_syzygy": false
+  },
+  {
+   "name": "RubiChess 20240817",
+   "folder": "RubiChess_20240817",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\RubiChess_20240817\\RubiChess-20240817_x86-64-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\RubiChess_20240817",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}",
+    "Ponder": "false"
+   },
+   "uci_id": "RubiChess 20240817 (avx2)",
+   "has_syzygy": true
+  },
+  {
+   "name": "Starzix 6.0",
+   "folder": "Starzix_6.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Starzix_6.0\\Starzix-6.0-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Starzix_6.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Starzix 6.0",
+   "has_syzygy": false
+  },
+  {
+   "name": "Triumviratus 7.0",
+   "folder": "Triumviratus_7.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Triumviratus_7.0\\Triumviratus_7.0_avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Triumviratus_7.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Triumviratus - 7.0 2026-09-10",
+   "has_syzygy": true
+  },
+  {
+   "name": "Stockfish 19",
+   "folder": "Stockfish_19",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Stockfish_19\\stockfish\\stockfish-windows-x86-64-universal.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Stockfish_19\\stockfish",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}",
+    "Ponder": "false"
+   },
+   "uci_id": "Stockfish 19",
+   "has_syzygy": true
+  }
+ ],
+ "seeds": [
+  {
+   "name": "PlentyChess 8.0.0",
+   "folder": "PlentyChess_8.0.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\PlentyChess_8.0.0\\PlentyChess-8.0.0-windows-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\PlentyChess_8.0.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}",
+    "Ponder": "false"
+   },
+   "uci_id": "PlentyChess 8.0.0",
+   "has_syzygy": true
+  },
+  {
+   "name": "Reckless 0.9.0",
+   "folder": "Reckless_0.9.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Reckless_0.9.0\\reckless-windows-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Reckless_0.9.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Reckless 0.9.0",
+   "has_syzygy": true
+  },
+  {
+   "name": "Cinder 0.6.1",
+   "folder": "Cinder_0.6.1",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Cinder_0.6.1\\cinder-v0.6.1-windows-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Cinder_0.6.1",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Cinder 0.6.1",
+   "has_syzygy": true
+  },
+  {
+   "name": "Caissa 2.0",
+   "folder": "Caissa_2.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Caissa_2.0\\caissa-2.0-x64-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Caissa_2.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}",
+    "Ponder": "false"
+   },
+   "uci_id": "Caissa 2.0 AVX2",
+   "has_syzygy": true
+  },
+  {
+   "name": "Coda 0.9.4",
+   "folder": "Coda_0.9.4",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Coda_0.9.4\\coda-0.9.4-windows-x86-64-v3.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Coda_0.9.4",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}",
+    "Ponder": "false",
+    "OwnBook": "false"
+   },
+   "uci_id": "Coda 0.9.4",
+   "has_syzygy": true
+  }
+ ]
+}

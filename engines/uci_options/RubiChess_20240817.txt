@@ -1,0 +1,22 @@
+id name RubiChess 20240817 (avx2)
+option name Allow Large Pages type check default true
+option name BookBestMove type check default true
+option name BookDepth type spin default 255 min 0 max 255
+option name BookFile type string default <empty>
+option name Clear Hash type button
+option name Contempt type spin default 0 min -100 max 100
+option name ContemptRatio type spin default 4 min 0 max 16
+option name Hash type spin default 16 min 1 max 1048576
+option name LimitNps type spin default 0 min 0 max 2147483647
+option name LogFile type string default 
+option name Move_Overhead type spin default 100 min 0 max 5000
+option name MultiPV type spin default 1 min 1 max 64
+option name NNUENetpath type string default <Default>
+option name Ponder type check default false
+option name Syzygy50MoveRule type check default true
+option name SyzygyPath type string default <empty>
+option name SyzygyProbeLimit type spin default 7 min 0 max 7
+option name Threads type spin default 1 min 1 max 256
+option name UCI_Chess960 type check default false
+option name UCI_RatingAdv type spin default 0 min -10000 max 10000
+option name Use_NNUE type check default true

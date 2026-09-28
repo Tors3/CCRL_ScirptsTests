@@ -9,3 +9,6 @@ __pycache__/
 *.rtbw
 *.rtbz
 pgn/
+
+# eccezione: Stockfish 10 di riferimento per il bench
+!third_party/stockfish-10-win/Windows/*.exe

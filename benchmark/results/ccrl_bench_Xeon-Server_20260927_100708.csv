@@ -1,0 +1,2 @@
+instances,sockets,ht_siblings,nps_mean,nps_median,nps_min_instance,nps_max_instance,stdev_pct,total_nps,seconds,bench_time_ms,factor,tc_40/15,tc_40/2,tc_15m+10s,tc_2m+1s
+1,0,0,2281835,2282351,2281835,2281835,0.24,2281835,10.7,1726,0.8405,40/13  (12:36),40/1:41,12:36 + 8.4s,101s + 0.84s

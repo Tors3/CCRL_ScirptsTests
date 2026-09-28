@@ -1,0 +1,231 @@
+{
+ "seed": {
+  "name": "Caissa 2.0",
+  "folder": "Caissa_2.0",
+  "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Caissa_2.0\\caissa-2.0-x64-avx2.exe",
+  "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Caissa_2.0",
+  "options": {
+   "Threads": "${THREADS}",
+   "Hash": "${HASH}",
+   "Ponder": "false"
+  },
+  "uci_id": "Caissa 2.0 AVX2"
+ },
+ "opponents": [
+  {
+   "name": "Stockfish 19",
+   "folder": "Stockfish_19",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Stockfish_19\\stockfish\\stockfish-windows-x86-64-universal.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Stockfish_19\\stockfish",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}",
+    "Ponder": "false"
+   },
+   "uci_id": "Stockfish 19"
+  },
+  {
+   "name": "Reckless 0.9.0",
+   "folder": "Reckless_0.9.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Reckless_0.9.0\\reckless-windows-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Reckless_0.9.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Reckless 0.9.0"
+  },
+  {
+   "name": "PlentyChess 7.0.0",
+   "folder": "PlentyChess_7.0.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\PlentyChess_7.0.0\\PlentyChess-7.0.0-windows-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\PlentyChess_7.0.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}",
+    "Ponder": "false"
+   },
+   "uci_id": "PlentyChess 7.0.0"
+  },
+  {
+   "name": "pawnocchio 2.0.1",
+   "folder": "pawnocchio_2.0.1",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\pawnocchio_2.0.1\\pawnocchio-2.0.1-windows-x86_64_v3.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\pawnocchio_2.0.1",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "pawnocchio 2.0.1"
+  },
+  {
+   "name": "Obsidian 16.0",
+   "folder": "Obsidian_16.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Obsidian_16.0\\Obsidian160-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Obsidian_16.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Obsidian 16.0"
+  },
+  {
+   "name": "Cinder 0.6.1",
+   "folder": "Cinder_0.6.1",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Cinder_0.6.1\\cinder-v0.6.1-windows-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Cinder_0.6.1",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Cinder 0.6.1"
+  },
+  {
+   "name": "Alexandria 9.0.0",
+   "folder": "Alexandria_9.0.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Alexandria_9.0.0\\Alexandria-9.0-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Alexandria_9.0.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Alexandria-9.0.0"
+  },
+  {
+   "name": "Stormphrax 8.0.0",
+   "folder": "Stormphrax_8.0.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Stormphrax_8.0.0\\stormphrax-8.0.0-avx2-bmi2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Stormphrax_8.0.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Stormphrax 8.0.0"
+  },
+  {
+   "name": "Hobbes 3.0",
+   "folder": "Hobbes_3.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Hobbes_3.0\\hobbes-windows-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Hobbes_3.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Hobbes 3.0"
+  },
+  {
+   "name": "Viridithas 20.0.0",
+   "folder": "Viridithas_20.0.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Viridithas_20.0.0\\viridithas-20-win-x86-64-v3.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Viridithas_20.0.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}",
+    "Ponder": "false"
+   },
+   "uci_id": "Viridithas 20.0.0"
+  },
+  {
+   "name": "Triumviratus 7.0",
+   "folder": "Triumviratus_7.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Triumviratus_7.0\\Triumviratus_7.0_avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Triumviratus_7.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Triumviratus - 7.0 2026-09-10"
+  },
+  {
+   "name": "Coda 0.9.3",
+   "folder": "Coda_0.9.3",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Coda_0.9.3\\coda-0.9.3-windows-x86-64-v3.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Coda_0.9.3",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}",
+    "Ponder": "false",
+    "OwnBook": "false"
+   },
+   "uci_id": "Coda 0.9.3"
+  },
+  {
+   "name": "Astra 7.0",
+   "folder": "Astra_7.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Astra_7.0\\astra-7.0-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Astra_7.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Astra 7.0"
+  },
+  {
+   "name": "Berserk 14",
+   "folder": "Berserk_14",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Berserk_14\\berserk-14-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Berserk_14",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}",
+    "Ponder": "false"
+   },
+   "uci_id": "Berserk 14"
+  },
+  {
+   "name": "Tarnished 6.0-Eternal",
+   "folder": "Tarnished_6.0-Eternal",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Tarnished_6.0-Eternal\\tarnished-6.0-eternal_x86-64-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Tarnished_6.0-Eternal",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Tarnished v6.0 (Eternal)"
+  },
+  {
+   "name": "Halogen 16",
+   "folder": "Halogen_16",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Halogen_16\\Halogen-16.0.0-windows-x86_64-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Halogen_16",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Halogen 16.0.0"
+  },
+  {
+   "name": "Quanticade Cronus 3.0",
+   "folder": "Quanticade_Cronus-3.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Quanticade_Cronus-3.0\\Quanticade-Windows-clang-x86-64-bmi2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Quanticade_Cronus-3.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Quanticade Cronus 3.0"
+  },
+  {
+   "name": "Clover 9.0",
+   "folder": "Clover_9.0",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Clover_9.0\\Clover.9.0-avx2.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\Clover_9.0",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "Clover 9.0"
+  },
+  {
+   "name": "PZChessBot 7.1",
+   "folder": "PZChessBot_7.1",
+   "cmd": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\PZChessBot_7.1\\pzchessbot-win-avx2-pext.exe",
+   "dir": "C:\\Users\\Francesco\\Desktop\\CCRL\\engines\\PZChessBot_7.1",
+   "options": {
+    "Threads": "${THREADS}",
+    "Hash": "${HASH}"
+   },
+   "uci_id": "PZChessBot v7.1"
+  }
+ ]
+}

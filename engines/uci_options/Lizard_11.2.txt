@@ -1,0 +1,20 @@
+id name Lizard 11.2.0
+option name Threads type spin default 1 min 1 max 512
+option name MultiPV type spin default 1 min 1 max 256
+option name Hash type spin default 32 min 1 max 1048576
+option name UCI_Chess960 type check default false
+option name UCI_ShowWDL type check default false
+option name UCI_PrettyPrint type check default true
+option name SEMinDepth type spin default 5 min 3 max 7
+option name NMPMinDepth type spin default 6 min 3 max 9
+option name RFPMaxDepth type spin default 6 min 3 max 9
+option name RFPMargin type spin default 47 min 26 max 68
+option name ProbcutMinDepth type spin default 2 min 1 max 5
+option name ProbcutBeta type spin default 256 min 141 max 371
+option name IIRMinDepth type spin default 3 min 2 max 6
+option name AspWindow type spin default 12 min 7 max 17
+option name ValuePawn type spin default 171 min 94 max 248
+option name ValueKnight type spin default 794 min 437 max 1151
+option name ValueBishop type spin default 943 min 519 max 1367
+option name ValueRook type spin default 1620 min 891 max 2349
+option name ValueQueen type spin default 2994 min 1647 max 4341

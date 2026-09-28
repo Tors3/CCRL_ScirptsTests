@@ -1,0 +1,44 @@
+{
+  "host": "Xeon-Server",
+  "os": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel(R) Xeon(R) Gold 6138 CPU @ 2.00GHz",
+  "engine": "Stockfish 10 64 BMI2",
+  "build": "bmi2",
+  "sf": "C:\\Users\\Francesco\\Desktop\\CCRL\\bench\\stockfish-10-win\\Windows\\stockfish_10_x64_bmi2.exe",
+  "pin": "win",
+  "args": {
+    "sf": null,
+    "build": "bmi2",
+    "levels": "1",
+    "runs": 5,
+    "warmup": 1,
+    "hash": 16,
+    "depth": 13,
+    "ref_ms": 2054,
+    "no_pin": false,
+    "out": null
+  },
+  "signature": [
+    3939338
+  ],
+  "results": [
+    {
+      "instances": 1,
+      "sockets": "0",
+      "ht_siblings": 0,
+      "nps_mean": 2281835,
+      "nps_median": 2282351,
+      "nps_min_instance": 2281835,
+      "nps_max_instance": 2281835,
+      "stdev_pct": 0.24,
+      "total_nps": 2281835,
+      "seconds": 10.7,
+      "bench_time_ms": 1726,
+      "factor": 0.8405,
+      "tc_40/15": "40/13  (12:36)",
+      "tc_40/2": "40/1:41",
+      "tc_15m+10s": "12:36 + 8.4s",
+      "tc_2m+1s": "101s + 0.84s"
+    }
+  ]
+}

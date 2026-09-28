@@ -8,6 +8,11 @@ rem   gauntlet  = Caissa contro ogni avversario (19 accoppiamenti, 760 partite)
 rem   roundrobin= tutti contro tutti (190 accoppiamenti, 7600 partite!)
 set HASH=2048
 set THREADS=4
+rem Il torneo gira tutto a 1690+19 per avere un unico time control.
+rem Nota: il bench del 2026-09-24 (stockfish_10_x64_bmi2, fattore 1.694 a 40
+rem istanze) darebbe 1524+17; 1690+19 viene da un bench che aveva usato per
+rem errore il binario a 32 bit. La differenza e' dell'11%%, entro l'incertezza
+rem del riferimento CCRL, quindi si e' scelto di non cambiare a meta' torneo.
 set TC=1690+19
 rem corsie indipendenti per nodo x partite in parallelo dentro una corsia:
 rem LANES x CONCURRENCY x THREADS = core fisici del nodo (5 x 1 x 4 = 20).
@@ -15,6 +20,9 @@ rem Piu' corsie = nessun tempo morto a fine match (ogni corsia ha il suo fastche
 set LANES=5
 set CONCURRENCY=1
 set PASSES=2
+rem Passate da giocare davvero: 1 = 20 partite per avversario (380 totali),
+rem 2 = 40 (760). PASSES resta 2 perche' fissa gli offset delle aperture.
+set PLAY_PASSES=1
 set ROUNDS_PER_PASS=5
 set LOG_LEVEL=info
 rem mask di affinity relativa al nodo NUMA (un thread per core fisico), applicata

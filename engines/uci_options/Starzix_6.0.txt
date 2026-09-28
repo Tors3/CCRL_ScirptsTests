@@ -1,0 +1,3 @@
+id name Starzix 6.0
+option name Hash type spin default 32 min 1 max 65536
+option name Threads type spin default 1 min 1 max 256

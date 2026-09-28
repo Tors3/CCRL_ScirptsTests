@@ -1,0 +1,8 @@
+id name Raphael 4.2.0
+option name Hash type spin default 64 min 1 max 524288
+option name Threads type spin default 1 min 1 max 2048
+option name UCI_Chess960 type check default false
+option name MoveOverhead type spin default 10 min 0 max 5000
+option name Datagen type check default false
+option name Softnodes type check default false
+option name SoftNodeHardLimitMultiplier type spin default 1678 min 1 max 5000

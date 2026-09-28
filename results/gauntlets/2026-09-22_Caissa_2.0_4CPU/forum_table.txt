@@ -1,0 +1,24 @@
+ #  Name                                   Points      %    Elo
+-----------------------------------------------------------------
+ 1  Caissa 2.0 64-bit 4CPU                189/380   49.7     -2
+ 2  Berserk 14 64-bit 4CPU                10.5/20   52.5    +17
+ 3  Obsidian 16.0 64-bit 4CPU             10.5/20   52.5    +17
+ 4  Stockfish 19 64-bit 4CPU              10.5/20   52.5    +17
+ 5  Alexandria 9.0.0 64-bit 4CPU            10/20   50.0      0
+ 6  Astra 7.0 64-bit 4CPU                   10/20   50.0      0
+ 7  Cinder 0.6.1 64-bit 4CPU                10/20   50.0      0
+ 8  Clover 9.0 64-bit 4CPU                  10/20   50.0      0
+ 9  Coda 0.9.3 64-bit 4CPU                  10/20   50.0      0
+10  Halogen 16 64-bit 4CPU                  10/20   50.0      0
+11  Hobbes 3.0 64-bit 4CPU                  10/20   50.0      0
+12  pawnocchio 2.0.1 64-bit 4CPU            10/20   50.0      0
+13  PlentyChess 7.0.0 64-bit 4CPU           10/20   50.0      0
+14  Quanticade Cronus 3.0 64-bit 4CPU       10/20   50.0      0
+15  Reckless 0.9.0 64-bit 4CPU              10/20   50.0      0
+16  Stormphrax 8.0.0 64-bit 4CPU            10/20   50.0      0
+17  Tarnished 6.0-Eternal 64-bit 4CPU       10/20   50.0      0
+18  Triumviratus 7.0 64-bit 4CPU            10/20   50.0      0
+19  Viridithas 20.0.0 64-bit 4CPU           10/20   50.0      0
+20  PZChessBot 7.1 64-bit 4CPU             9.5/20   47.5    -17
+
+380/380 games, 98.9% draws, time control 1690+19, hash 2048MB, egtb 5-man, book avt-book-2026.pgn

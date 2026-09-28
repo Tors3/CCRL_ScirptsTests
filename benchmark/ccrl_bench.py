@@ -30,6 +30,7 @@ import struct
 import subprocess
 import sys
 import threading
+import time
 from datetime import datetime
 
 IS_WIN = os.name == "nt"
@@ -413,6 +414,26 @@ def system_checks():
         if la > 1.0:
             warn.append(f"load average {la:.2f}: close other processes")
     elif IS_WIN:
+        # CPU load over one second (GetSystemTimes): anything already running
+        # skews the whole benchmark, e.g. engines still shutting down
+        try:
+            import ctypes
+            from ctypes import wintypes
+
+            def times():
+                i, k, u = wintypes.FILETIME(), wintypes.FILETIME(), wintypes.FILETIME()
+                ctypes.windll.kernel32.GetSystemTimes(ctypes.byref(i), ctypes.byref(k), ctypes.byref(u))
+                f = lambda t: (t.dwHighDateTime << 32) | t.dwLowDateTime
+                return f(i), f(k) + f(u)          # kernel time includes idle
+            i0, t0 = times()
+            time.sleep(1)
+            i1, t1 = times()
+            busy = 100.0 * (1 - (i1 - i0) / max(t1 - t0, 1))
+            if busy > 5:
+                warn.append(f"CPU already {busy:.0f}% busy: close other programs and wait for the "
+                            f"machine to be idle, otherwise the factor comes out too high")
+        except Exception:
+            pass
         try:
             out = subprocess.run(["powercfg", "/getactivescheme"],
                                  capture_output=True, text=True).stdout.lower()

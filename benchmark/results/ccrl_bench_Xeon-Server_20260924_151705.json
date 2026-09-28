@@ -1,0 +1,80 @@
+{
+  "host": "Xeon-Server",
+  "os": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel(R) Xeon(R) Gold 6138 CPU @ 2.00GHz",
+  "engine": "Stockfish 10 64 BMI2",
+  "build": "bmi2",
+  "sf": "C:\\Users\\Francesco\\Desktop\\CCRL\\bench\\stockfish-10-win\\Windows\\stockfish_10_x64_bmi2.exe",
+  "pin": "win",
+  "args": {
+    "sf": null,
+    "build": "bmi2",
+    "levels": "1,20,40",
+    "runs": 5,
+    "warmup": 1,
+    "hash": 16,
+    "depth": 13,
+    "ref_ms": 2054,
+    "no_pin": false,
+    "out": null
+  },
+  "signature": [
+    3939338
+  ],
+  "results": [
+    {
+      "instances": 1,
+      "sockets": "0",
+      "ht_siblings": 0,
+      "nps_mean": 1527579,
+      "nps_median": 1526283,
+      "nps_min_instance": 1527579,
+      "nps_max_instance": 1527579,
+      "stdev_pct": 0.86,
+      "total_nps": 1527579,
+      "seconds": 16.1,
+      "bench_time_ms": 2579,
+      "factor": 1.2555,
+      "tc_40/15": "40/19  (18:50)",
+      "tc_40/2": "40/2:31",
+      "tc_15m+10s": "18:50 + 12.6s",
+      "tc_2m+1s": "151s + 1.26s"
+    },
+    {
+      "instances": 20,
+      "sockets": "0",
+      "ht_siblings": 0,
+      "nps_mean": 1109572,
+      "nps_median": 1113278,
+      "nps_min_instance": 1063589,
+      "nps_max_instance": 1142964,
+      "stdev_pct": 2.57,
+      "total_nps": 22191437,
+      "seconds": 26.5,
+      "bench_time_ms": 3550,
+      "factor": 1.7285,
+      "tc_40/15": "40/26  (25:56)",
+      "tc_40/2": "40/3:27",
+      "tc_15m+10s": "25:56 + 17.3s",
+      "tc_2m+1s": "207s + 1.73s"
+    },
+    {
+      "instances": 40,
+      "sockets": "0+1",
+      "ht_siblings": 0,
+      "nps_mean": 1132371,
+      "nps_median": 1145404,
+      "nps_min_instance": 915335,
+      "nps_max_instance": 1262737,
+      "stdev_pct": 10.93,
+      "total_nps": 45294839,
+      "seconds": 30.4,
+      "bench_time_ms": 3479,
+      "factor": 1.6937,
+      "tc_40/15": "40/25  (25:24)",
+      "tc_40/2": "40/3:23",
+      "tc_15m+10s": "25:24 + 16.9s",
+      "tc_2m+1s": "203s + 1.69s"
+    }
+  ]
+}

@@ -43,3 +43,27 @@ Data: 2026-09-22 · Host: 2× Xeon Gold 6138 (Skylake-SP, AVX-512 disponibile ma
 6. **Caissa 2.0** — rileva 2 nodi NUMA (opzioni NUMA/affinity da controllare nel setup del torneo).
 
 Nessun motore richiede file NNUE esterni: tutte le reti sono incorporate negli eseguibili.
+
+
+## Motori aggiunti il 2026-09-27 (gauntlet Triumviratus 7.0 8CPU Blitz)
+
+Scelti dalla top 30 CCRL Blitz; Torch v4, Dragon 3.2, Ethereal 14.25 e Fritz 20 sono commerciali o non pubblici, sostituiti dai successivi in classifica (Devre, Titan, Velvet, Minke). Verificati con `toolserify_engine.py` (uci, isready e una ricerca `go depth 12` dalla posizione iniziale).
+
+| Motore | Versione | Release | Asset | Build | SHA256 exe | `id name` | Opzioni | Usato nel gauntlet 8CPU |
+|---|---|---|---|---|---|---|---|---|
+| Integral | v8 | [release](https://github.com/aronpetko/integral/releases/tag/v8) | `integral_avx2.exe` | avx2 | `a3830c6d159d90e45217306ac7c752f6d89a8f59d5b616b23070b72a15fe1894` | `Integral v8` | Threads max 512; Syzygy | si |
+| Horsie | 1.1 | [release](https://github.com/liamt19/Horsie/releases/tag/v1.1) | `horsie-1_1-v3.exe` | x86-64-v3 | `6a88f6a2cce126b28c6b81001c41803a08155d5a65368cdb00d64cb93192f369` | `Horsie 1.1.0` | Threads max 512; no Syzygy | si |
+| Lizard | 11.2 | [release](https://github.com/liamt19/Lizard/releases/tag/v11.2) | `Lizard-11_2-win.exe` | avx2 (win, non-512) | `52f2a8298c8f01c0f8ae8de64bbfc1311e5db76fecefcf4b8e90cd69ec16d246` | `Lizard 11.2.0` | Threads max 512; no Syzygy | si |
+| Raphael | 4.2.0 | [release](https://github.com/Orbital-Web/Raphael/releases/tag/v4.2.0) | `Raphael-4.2.0-Windows-avx2.exe` | avx2 | `5376fd967cce6d92846454505045cfc40b711ff8a0a5fec039a476659a08386f` | `Raphael 4.2.0` | Threads max 2048; no Syzygy | si |
+| RubiChess | 20240817 | [release](https://github.com/Matthies/RubiChess/releases/tag/20240817) | `RubiChess-20240817_x86-64-avx2.exe` | avx2 (dallo zip ufficiale, con la rete nn-bc638d5ec9-20240730.nnue accanto) | `40221431843fcb42b54dce3e0bdded952ad5902c2c412e0dfe71bbf561328ad9` | `RubiChess 20240817 (avx2)` | Threads max 256; Syzygy | si |
+| Starzix | 6.1 | [release](https://github.com/zzzzz151/Starzix/releases/tag/6.1) | `Starzix-6.1-avx2.exe` | avx2 | `5ed9122e24ef6db9051ee6dbaca2eec930e3ed5fb10e0fe789395ba79f143e15` | `Starzix 6.1` | Threads max 512; no Syzygy | si |
+| Devre | 7.0 | [release](https://github.com/OmerFarukTutkun/Devre/releases/tag/v7.0) | `devre-7.0-avx2.exe` | avx2 | `65a43ab9d50d78cdc5ef83d8bc722434de20bee1d22ec70ad5400240d4245f8c` | `Devre 7.0` | Threads max 256; Syzygy | si |
+| Titan | 1.1.0 | [release](https://github.com/jeff-pow/Titan/releases/tag/v1.1.0) | `Titan-x64-windows-avx2.exe` | avx2 | `51d826d7519db8e53972b757259ff3d96296c09b7ab30bdd042f78fb9b487fad` | `Titan 1.1.0` | Threads max 64; no Syzygy | si |
+| Velvet | 8.1.1 | [release](https://github.com/mhonert/velvet-chess/releases/tag/v8.1.1) | `velvet-v8.1.1-x86_64-avx2.exe` | avx2 | `b86fc64f30d76bad514934a71d473e15798e4f61dc85f183d81ff2a27c659a6b` | `Velvet v8.1.1` | Threads max 512; Syzygy | si |
+| Minke | 7.0.0 | [release](https://github.com/enfmarinho/Minke/releases/tag/v7.0.0) | `minke-v7.0.0-avx2.exe` | avx2 | `ce23e0508472b5f7c272e17788f0ee1cbc5b2719ba2ac8390cee1fc0b2d44935` | `Minke 7.0.0` | Threads max 2048; no Syzygy | si |
+| Seer | 2.8.0 | [release](https://github.com/connormcmonigle/seer-nnue/releases/tag/v2.8.0) | `seer_v2.8_x64_avx2_popcnt.exe` | avx2-popcnt | `0e62dacd2bcb6c37a37c2fa35e47286dcd0600eafc7a4307b2853e571e338042` | `Seer 2.8.0` | Threads max 512; Syzygy | no (39a Blitz, riserva) |
+| Koivisto | 9.0 | [release](https://github.com/Luecx/Koivisto/releases/tag/v9.0) | `Koivisto_9.0-windows-avx2-pgo.exe` | avx2-pgo | `9fcea126ed7dc882718bd22804d6c1227377009cd24fb983a1694a6d625e443e` | `Koivisto 9.0` | Threads max 256; Syzygy | no (fuori top 40) |
+| Renegade | 1.3.1 | [release](https://github.com/pkrisz99/Renegade/releases/tag/v1.3.1) | `Renegade_1.3.1_windows_x86-64-bmi2.exe` | **bmi2** (unica build Windows) | `dfb372d78a511779e4bd5c412820446b31266b8e6e0a386ac07b2c95e55cce06` | `Renegade 1.3.1` | Threads max 1024; no Syzygy | no (fuori top 40) |
+| Black Marlin | 9.0 | [release](https://github.com/jnlt3/blackmarlin/releases/tag/9.0) | `blackmarlin-windows-x86-64-v3.exe` | x86-64-v3 | `9fbc60c2b73fd68ca28fd357a3145c79844cd88fa0430918466147961a756748` | `Black Marlin 9.0` | Threads max 255; no Syzygy | no (fuori top 40) |
+| Sirius | 9.0 | [release](https://github.com/mcthouacbb/Sirius/releases/tag/v9.0) | `sirius-9.0-windows-x86-64-v3.exe` | x86-64-v3 | `f85f945a5108e3d32fc5beba8c13d2478a3d457023dfa39dc21e63a0fc214b77` | `Sirius 9.0` | Threads max 2048; no Syzygy | no (troppo debole) |
+| Motor | 0.9.0 | [release](https://github.com/martinnovaak/motor/releases/tag/v0.9.0) | `motor_090_avx2.exe` | avx2 | `dd6bd3973f5b4cc5f74a5f46bcc29dc78110f399957e058f75db7b54a7ef192f` | `Motor 0.9.0` | Threads max 1; no Syzygy | no (**solo single-thread**: Threads max 1) |
